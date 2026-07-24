@@ -6,98 +6,34 @@
 <title>Safe Soulmates — Community Collaboration Board</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
-
   :root {
-    --sage: #73976C;
-    --charcoal: #5A5A5A;
-    --lime: #E5E577;
-    --purple: #8863A8;
-    --blue: #5D79B0;
-    --berry: #BC4367;
-    --cream: #FDFBF5;
-    --soft-bg: #F4F1EA;
+    --sage: #73976C; --charcoal: #5A5A5A; --lime: #E5E577; --purple: #8863A8;
+    --blue: #5D79B0; --berry: #BC4367; --cream: #FDFBF5; --soft-bg: #F4F1EA;
     --card-shadow: 0 4px 20px rgba(90,90,90,0.10);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'Nunito', sans-serif;
-    background: var(--soft-bg);
-    color: var(--charcoal);
-    min-height: 100vh;
-  }
+  body { font-family: 'Nunito', sans-serif; background: var(--soft-bg); color: var(--charcoal); min-height: 100vh; }
 
   /* HEADER */
-  header {
-    background: var(--cream);
-    border-bottom: 3px solid var(--lime);
-    padding: 18px 28px 14px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 12px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(90,90,90,0.08);
-  }
-
+  header { background: var(--cream); border-bottom: 3px solid var(--lime); padding: 18px 28px 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(90,90,90,0.08); }
   .logo-area { display: flex; align-items: center; gap: 14px; }
-  .logo-dot {
-    width: 44px; height: 44px; border-radius: 50%;
-    background: var(--purple);
-    display: flex; align-items: center; justify-content: center;
-    color: white; font-size: 22px; flex-shrink: 0;
-  }
+  .logo-dot { width: 44px; height: 44px; border-radius: 50%; background: var(--purple); display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; flex-shrink: 0; }
   .logo-text h1 { font-size: 1.3rem; font-weight: 900; color: var(--purple); line-height: 1.1; font-family: 'Lora', serif; }
   .logo-text p { font-size: 0.78rem; color: var(--charcoal); font-weight: 600; opacity: 0.8; }
-
   .header-badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
   .badge { background: var(--soft-bg); border: 2px solid var(--sage); color: var(--charcoal); font-size: 0.72rem; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
 
-  /* TAB NAV */
-  .tab-nav {
-    background: var(--cream);
-    border-bottom: 2px solid rgba(0,0,0,0.07);
-    display: flex;
-    overflow-x: auto;
-    padding: 0 24px;
-    gap: 4px;
-    scrollbar-width: none;
-  }
+  /* TABS */
+  .tab-nav { background: var(--cream); border-bottom: 2px solid rgba(0,0,0,0.07); display: flex; overflow-x: auto; padding: 0 24px; gap: 4px; scrollbar-width: none; }
   .tab-nav::-webkit-scrollbar { display: none; }
-
-  .tab-btn {
-    padding: 13px 18px 11px;
-    border: none;
-    background: none;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--charcoal);
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    white-space: nowrap;
-    opacity: 0.6;
-    transition: all 0.18s ease;
-    flex-shrink: 0;
-  }
+  .tab-btn { padding: 13px 18px 11px; border: none; background: none; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; color: var(--charcoal); cursor: pointer; border-bottom: 3px solid transparent; white-space: nowrap; opacity: 0.6; transition: all 0.18s ease; flex-shrink: 0; }
   .tab-btn:hover { opacity: 0.9; }
   .tab-btn.active { opacity: 1; border-bottom-color: var(--purple); color: var(--purple); }
-
-  /* PANELS */
   .panel { display: none; }
   .panel.active { display: block; }
 
-  /* WELCOME BANNER */
-  .welcome {
-    background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
-    color: white; text-align: center;
-    padding: 36px 24px 30px;
-    position: relative; overflow: hidden;
-  }
+  /* WELCOME */
+  .welcome { background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%); color: white; text-align: center; padding: 36px 24px 30px; position: relative; overflow: hidden; }
   .welcome::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.06); }
   .welcome::after { content: ''; position: absolute; bottom: -60px; left: -30px; width: 160px; height: 160px; border-radius: 50%; background: rgba(255,255,255,0.05); }
   .welcome h2 { font-family: 'Lora', serif; font-size: 1.7rem; font-weight: 600; margin-bottom: 10px; }
@@ -105,50 +41,35 @@
   .welcome-rules { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 8px; }
   .rule-pill { background: rgba(255,255,255,0.18); border: 1.5px solid rgba(255,255,255,0.3); color: white; font-size: 0.75rem; font-weight: 700; padding: 5px 12px; border-radius: 20px; }
 
-  /* BOARD COLUMNS */
-  .board {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    padding: 28px 24px 60px;
-    max-width: 1400px;
-    margin: 0 auto;
-  }
-
-  .column {
-    background: var(--cream);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-    display: flex; flex-direction: column;
-    animation: fadeSlide 0.5s ease both;
-  }
+  /* BOARD */
+  .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 28px 24px 60px; max-width: 1400px; margin: 0 auto; }
+  .column { background: var(--cream); border-radius: 18px; overflow: hidden; box-shadow: var(--card-shadow); display: flex; flex-direction: column; animation: fadeSlide 0.5s ease both; }
   @keyframes fadeSlide { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
   .column:nth-child(1){animation-delay:0.05s} .column:nth-child(2){animation-delay:0.10s}
   .column:nth-child(3){animation-delay:0.15s} .column:nth-child(4){animation-delay:0.20s}
   .column:nth-child(5){animation-delay:0.25s} .column:nth-child(6){animation-delay:0.30s}
 
-  .col-header { padding: 16px 18px 14px; display: flex; align-items: center; gap: 10px; border-bottom: 2px solid rgba(0,0,0,0.06); }
-  .col-emoji { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
-  .col-info h3 { font-size: 1rem; font-weight: 800; line-height: 1.2; }
-  .col-info p { font-size: 0.75rem; opacity: 0.65; margin-top: 2px; font-weight: 600; }
-  .col-count { margin-left: auto; background: rgba(0,0,0,0.07); color: var(--charcoal); font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 12px; }
-
-  .column[data-col="0"] .col-header { border-top: 4px solid var(--lime); }
-  .column[data-col="1"] .col-header { border-top: 4px solid var(--sage); }
-  .column[data-col="2"] .col-header { border-top: 4px solid var(--blue); }
-  .column[data-col="3"] .col-header { border-top: 4px solid var(--purple); }
-  .column[data-col="4"] .col-header { border-top: 4px solid var(--berry); }
-  .column[data-col="5"] .col-header { border-top: 4px solid var(--charcoal); }
+  /* COLOURED HEADERS — the key change */
+  .col-header { padding: 18px 18px 16px; display: flex; align-items: center; gap: 10px; }
+  .col-emoji { font-size: 1.7rem; line-height: 1; flex-shrink: 0; }
+  .col-info h3 { font-size: 1.05rem; font-weight: 800; line-height: 1.2; color: white; }
+  .col-info p { font-size: 0.75rem; margin-top: 2px; font-weight: 600; color: rgba(255,255,255,0.85); }
+  .col-count { margin-left: auto; background: rgba(255,255,255,0.25); color: white; font-size: 0.72rem; font-weight: 800; padding: 3px 9px; border-radius: 12px; flex-shrink: 0; }
+  .column[data-col="0"] .col-header { background: #b5a000; }
+  .column[data-col="1"] .col-header { background: #5a8a52; }
+  .column[data-col="2"] .col-header { background: var(--blue); }
+  .column[data-col="3"] .col-header { background: var(--purple); }
+  .column[data-col="4"] .col-header { background: var(--berry); }
+  .column[data-col="5"] .col-header { background: #444; }
+  .column[data-col="0"] .add-btn { background: #b5a000; }
+  .column[data-col="1"] .add-btn { background: #5a8a52; }
+  .column[data-col="2"] .add-btn { background: var(--blue); }
+  .column[data-col="3"] .add-btn { background: var(--purple); }
+  .column[data-col="4"] .add-btn { background: var(--berry); }
+  .column[data-col="5"] .add-btn { background: #444; }
 
   .cards { padding: 14px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-
-  .card {
-    background: white; border-radius: 12px; padding: 13px 14px;
-    box-shadow: 0 2px 8px rgba(90,90,90,0.08);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    animation: cardPop 0.3s ease both;
-  }
+  .card { background: white; border-radius: 12px; padding: 13px 14px; box-shadow: 0 2px 8px rgba(90,90,90,0.08); transition: transform 0.15s ease, box-shadow 0.15s ease; animation: cardPop 0.3s ease both; }
   @keyframes cardPop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
   .card:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(90,90,90,0.13); }
   .card-author { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; opacity: 0.5; }
@@ -159,7 +80,6 @@
   .like-btn:hover, .like-btn.liked { background: var(--lime); border-color: var(--lime); transform: scale(1.05); }
   .card.example { background: #fafafa; border: 1.5px dashed rgba(0,0,0,0.12); }
   .example-tag { font-size: 0.62rem; background: var(--soft-bg); border: 1px solid rgba(0,0,0,0.1); color: var(--charcoal); padding: 2px 7px; border-radius: 8px; font-weight: 700; opacity: 0.7; }
-
   .add-area { padding: 12px 14px 16px; border-top: 1.5px solid rgba(0,0,0,0.06); background: var(--soft-bg); }
   .add-area textarea { width: 100%; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 9px 11px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; resize: none; min-height: 56px; background: white; color: var(--charcoal); transition: border-color 0.2s ease; line-height: 1.5; }
   .add-area textarea:focus { outline: none; border-color: var(--purple); }
@@ -171,222 +91,56 @@
   .add-btn { border: none; border-radius: 8px; padding: 8px 14px; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800; cursor: pointer; color: white; transition: all 0.15s ease; flex-shrink: 0; }
   .add-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
-  .column[data-col="0"] .add-btn { background: var(--charcoal); }
-  .column[data-col="1"] .add-btn { background: var(--sage); }
-  .column[data-col="2"] .add-btn { background: var(--blue); }
-  .column[data-col="3"] .add-btn { background: var(--purple); }
-  .column[data-col="4"] .add-btn { background: var(--berry); }
-  .column[data-col="5"] .add-btn { background: var(--charcoal); }
-
-  /* ===== WORKSHOP SECTION ===== */
-  .workshop-wrap {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 28px 24px 60px;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .ws-intro {
-    background: linear-gradient(135deg, var(--sage) 0%, var(--blue) 100%);
-    color: white;
-    border-radius: 16px;
-    padding: 26px 28px;
-    display: flex;
-    gap: 18px;
-    align-items: flex-start;
-  }
+  /* WORKSHOP */
+  .workshop-wrap { max-width: 960px; margin: 0 auto; padding: 28px 24px 60px; display: flex; flex-direction: column; gap: 24px; }
+  .ws-intro { background: linear-gradient(135deg, var(--sage) 0%, var(--blue) 100%); color: white; border-radius: 16px; padding: 26px 28px; display: flex; gap: 18px; align-items: flex-start; }
   .ws-intro-icon { font-size: 2.4rem; flex-shrink: 0; margin-top: 2px; }
   .ws-intro h2 { font-family: 'Lora', serif; font-size: 1.35rem; margin-bottom: 6px; }
   .ws-intro p { font-size: 0.88rem; opacity: 0.92; line-height: 1.6; }
-
-  .ws-steps {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 10px;
-  }
-
-  .ws-step {
-    background: var(--cream);
-    border-radius: 12px;
-    padding: 14px 16px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    box-shadow: var(--card-shadow);
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--charcoal);
-  }
-  .ws-step-num {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: var(--purple); color: white;
-    font-size: 0.78rem; font-weight: 900;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .ws-section {
-    background: var(--cream);
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: var(--card-shadow);
-  }
-
-  .ws-section-header {
-    padding: 18px 22px 14px;
-    border-bottom: 2px solid rgba(0,0,0,0.06);
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
+  .ws-steps { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; }
+  .ws-step { background: var(--cream); border-radius: 12px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; box-shadow: var(--card-shadow); font-size: 0.82rem; font-weight: 700; color: var(--charcoal); }
+  .ws-step-num { width: 28px; height: 28px; border-radius: 50%; background: var(--purple); color: white; font-size: 0.78rem; font-weight: 900; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ws-section { background: var(--cream); border-radius: 18px; overflow: hidden; box-shadow: var(--card-shadow); }
+  .ws-section-header { padding: 18px 22px 14px; border-bottom: 2px solid rgba(0,0,0,0.06); display: flex; align-items: flex-start; gap: 14px; }
   .ws-section-icon { font-size: 1.8rem; flex-shrink: 0; margin-top: 2px; }
   .ws-section-title h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 3px; }
   .ws-section-title p { font-size: 0.78rem; opacity: 0.6; font-weight: 600; }
-  .ws-section-title .ws-prompt {
-    margin-top: 8px;
-    background: var(--soft-bg);
-    border-left: 3px solid var(--purple);
-    padding: 8px 12px;
-    border-radius: 0 8px 8px 0;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: var(--purple);
-    font-style: italic;
-  }
-
-  .ws-sticky-grid {
-    padding: 16px 22px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    min-height: 80px;
-    border-bottom: 1.5px solid rgba(0,0,0,0.06);
-  }
-
-  .ws-sticky {
-    border-radius: 10px;
-    padding: 12px 14px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    line-height: 1.45;
-    min-width: 120px;
-    max-width: 200px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-    position: relative;
-    animation: cardPop 0.3s ease both;
-    cursor: default;
-    transition: transform 0.15s ease;
-  }
+  .ws-section-title .ws-prompt { margin-top: 8px; background: var(--soft-bg); border-left: 3px solid var(--purple); padding: 8px 12px; border-radius: 0 8px 8px 0; font-size: 0.82rem; font-weight: 700; color: var(--purple); font-style: italic; }
+  .ws-sticky-grid { padding: 16px 22px; display: flex; flex-wrap: wrap; gap: 10px; min-height: 80px; border-bottom: 1.5px solid rgba(0,0,0,0.06); }
+  .ws-sticky { border-radius: 10px; padding: 12px 14px; font-size: 0.85rem; font-weight: 700; line-height: 1.45; min-width: 120px; max-width: 200px; box-shadow: 0 3px 10px rgba(0,0,0,0.08); animation: cardPop 0.3s ease both; cursor: default; transition: transform 0.15s ease; }
   .ws-sticky:hover { transform: translateY(-2px) rotate(0.5deg); }
-
   .ws-sticky.yellow { background: #FFF9C4; border: 1.5px solid #f0e060; color: #5a4a00; }
   .ws-sticky.pink   { background: #FFD6E0; border: 1.5px solid #f0a0b5; color: #6a0030; }
   .ws-sticky.blue   { background: #D6E8FF; border: 1.5px solid #9bbfe0; color: #003060; }
   .ws-sticky.green  { background: #D4F5D4; border: 1.5px solid #90d090; color: #1a4a1a; }
   .ws-sticky.purple { background: #EAD9FF; border: 1.5px solid #c4a0e8; color: #3a006a; }
   .ws-sticky.sage   { background: #DFF0DC; border: 1.5px solid #a8cfa0; color: #1f4020; }
-
-  .ws-add-row {
-    padding: 12px 22px 16px;
-    background: var(--soft-bg);
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .ws-input {
-    flex: 1;
-    min-width: 160px;
-    border: 2px solid rgba(0,0,0,0.1);
-    border-radius: 10px;
-    padding: 9px 12px;
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
-    background: white;
-    color: var(--charcoal);
-  }
+  .ws-add-row { padding: 12px 22px 16px; background: var(--soft-bg); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .ws-input { flex: 1; min-width: 160px; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 9px 12px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; background: white; color: var(--charcoal); }
   .ws-input:focus { outline: none; border-color: var(--purple); }
   .ws-input::placeholder { opacity: 0.45; font-style: italic; }
-  .ws-post-btn {
-    border: none; border-radius: 8px; padding: 9px 16px;
-    font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800;
-    cursor: pointer; color: white; background: var(--purple);
-    transition: all 0.15s ease; flex-shrink: 0;
-  }
+  .ws-post-btn { border: none; border-radius: 8px; padding: 9px 16px; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800; cursor: pointer; color: white; background: var(--purple); transition: all 0.15s ease; flex-shrink: 0; }
   .ws-post-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
-
-  /* ACTION TABLE */
   .action-table-wrap { padding: 16px 22px 20px; }
-  .action-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-  }
-  .action-table th {
-    background: var(--soft-bg);
-    padding: 9px 12px;
-    text-align: left;
-    font-weight: 800;
-    font-size: 0.76rem;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    border: 1.5px solid rgba(0,0,0,0.07);
-    color: var(--charcoal);
-    opacity: 0.8;
-  }
-  .action-table td {
-    padding: 10px 12px;
-    border: 1.5px solid rgba(0,0,0,0.07);
-    vertical-align: top;
-    line-height: 1.45;
-  }
+  .action-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  .action-table th { background: var(--soft-bg); padding: 9px 12px; text-align: left; font-weight: 800; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.04em; border: 1.5px solid rgba(0,0,0,0.07); color: var(--charcoal); opacity: 0.8; }
+  .action-table td { padding: 10px 12px; border: 1.5px solid rgba(0,0,0,0.07); vertical-align: top; line-height: 1.45; }
   .action-table tr:nth-child(even) td { background: #fafaf6; }
-  .status-badge {
-    display: inline-block;
-    padding: 2px 9px;
-    border-radius: 12px;
-    font-size: 0.7rem;
-    font-weight: 800;
-  }
+  .status-badge { display: inline-block; padding: 2px 9px; border-radius: 12px; font-size: 0.7rem; font-weight: 800; }
   .status-urgent { background: #FFD6E0; color: #8b0020; }
   .status-soon   { background: #FFF9C4; color: #5a4a00; }
   .status-later  { background: #D6E8FF; color: #003060; }
   .status-done   { background: #D4F5D4; color: #1a4a1a; }
-
-  .add-action-row {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-    flex-wrap: wrap;
-  }
-  .action-input {
-    flex: 2; min-width: 140px;
-    border: 2px solid rgba(0,0,0,0.1); border-radius: 8px;
-    padding: 8px 10px; font-family: 'Nunito', sans-serif; font-size: 0.8rem;
-    background: white; color: var(--charcoal);
-  }
+  .add-action-row { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .action-input { flex: 2; min-width: 140px; border: 2px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 8px 10px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; background: white; color: var(--charcoal); }
   .action-input:focus { outline: none; border-color: var(--purple); }
   .action-input.sm { flex: 1; }
-  select.action-input {
-    cursor: pointer;
-  }
-  .action-add-btn {
-    border: none; border-radius: 8px; padding: 8px 14px;
-    font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800;
-    cursor: pointer; color: white; background: var(--sage);
-    flex-shrink: 0;
-  }
+  select.action-input { cursor: pointer; }
+  .action-add-btn { border: none; border-radius: 8px; padding: 8px 14px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800; cursor: pointer; color: white; background: var(--sage); flex-shrink: 0; }
   .action-add-btn:hover { filter: brightness(1.1); }
-
-  /* FOOTER */
   footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--charcoal); opacity: 0.5; font-weight: 700; border-top: 1px solid rgba(0,0,0,0.06); }
-
-  /* TOAST */
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--purple); color: white; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; padding: 12px 22px; border-radius: 30px; z-index: 999; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 6px 20px rgba(136,99,168,0.35); pointer-events: none; }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
   @media (max-width: 600px) {
     .board { grid-template-columns: 1fr; padding: 16px 14px 50px; }
     .welcome h2 { font-size: 1.35rem; }
@@ -397,7 +151,6 @@
 </style>
 </head>
 <body>
-
 <header>
   <div class="logo-area">
     <div class="logo-dot">💛</div>
@@ -412,14 +165,10 @@
     <span class="badge">📱 Works on any phone</span>
   </div>
 </header>
-
-<!-- TAB NAV -->
 <nav class="tab-nav" role="tablist">
   <button class="tab-btn active" onclick="switchTab('ideas')" role="tab" aria-selected="true">💬 Share Your Ideas</button>
   <button class="tab-btn" onclick="switchTab('workshop')" role="tab" aria-selected="false">🧠 Workshop Space</button>
 </nav>
-
-<!-- ===================== IDEAS PANEL ===================== -->
 <div id="panel-ideas" class="panel active">
   <div class="welcome">
     <h2>Your space to share 💬</h2>
@@ -433,12 +182,8 @@
   </div>
   <div class="board" id="board"></div>
 </div>
-
-<!-- ===================== WORKSHOP PANEL ===================== -->
 <div id="panel-workshop" class="panel">
   <div class="workshop-wrap">
-
-    <!-- Intro -->
     <div class="ws-intro">
       <div class="ws-intro-icon">🧠</div>
       <div>
@@ -446,8 +191,6 @@
         <p>A simple space to explore a problem together, gather ideas, and agree next steps. Work through the sections in order — or dip in wherever is useful. No pressure, no wrong answers.</p>
       </div>
     </div>
-
-    <!-- Step guide -->
     <div class="ws-steps">
       <div class="ws-step"><div class="ws-step-num">1</div>Define the problem</div>
       <div class="ws-step"><div class="ws-step-num">2</div>Who does it affect?</div>
@@ -456,301 +199,163 @@
       <div class="ws-step"><div class="ws-step-num">5</div>Brainstorm ideas</div>
       <div class="ws-step"><div class="ws-step-num">6</div>Action steps</div>
     </div>
-
-    <!-- Section 1: Problem -->
-    <div class="ws-section" id="ws-problem">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">🎯</div>
-        <div class="ws-section-title">
-          <h3>1 — What is the problem?</h3>
-          <p>Describe the core issue in one sentence</p>
-          <div class="ws-prompt">"We need a new regular venue since Milton Arms is changing its format"</div>
-        </div>
-      </div>
-      <div class="ws-sticky-grid" id="stickies-problem">
-        <div class="ws-sticky yellow">Need a new regular venue</div>
-        <div class="ws-sticky yellow">Not enough volunteers</div>
-        <div class="ws-sticky yellow">Communication between staff and members</div>
-      </div>
-      <div class="ws-add-row">
-        <input class="ws-input" id="in-problem" placeholder="Add your view of the problem…" />
-        <button class="ws-post-btn" onclick="addSticky('problem','yellow')">+ Add</button>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">🎯</div><div class="ws-section-title"><h3>1 — What is the problem?</h3><p>Describe the core issue in one sentence</p><div class="ws-prompt">"We need a new regular venue since Milton Arms is changing its format"</div></div></div>
+      <div class="ws-sticky-grid" id="stickies-problem"><div class="ws-sticky yellow">Need a new regular venue</div><div class="ws-sticky yellow">Not enough volunteers</div><div class="ws-sticky yellow">Communication between staff and members</div></div>
+      <div class="ws-add-row"><input class="ws-input" id="in-problem" placeholder="Add your view of the problem…"/><button class="ws-post-btn" onclick="addSticky('problem','yellow')">+ Add</button></div>
     </div>
-
-    <!-- Section 2: Who does it affect -->
-    <div class="ws-section" id="ws-affect">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">👥</div>
-        <div class="ws-section-title">
-          <h3>2 — Who does it affect?</h3>
-          <p>Members, volunteers, staff, carers, the wider community?</p>
-          <div class="ws-prompt">"Who feels this problem most? Who notices it?"</div>
-        </div>
-      </div>
-      <div class="ws-sticky-grid" id="stickies-affect">
-        <div class="ws-sticky blue">All 200 Soulmates</div>
-        <div class="ws-sticky blue">Volunteers — fewer events they can help with</div>
-        <div class="ws-sticky blue">Members who rely on transport to events</div>
-        <div class="ws-sticky blue">Members with sensory or access needs</div>
-      </div>
-      <div class="ws-add-row">
-        <input class="ws-input" id="in-affect" placeholder="Who else does this affect?" />
-        <button class="ws-post-btn" onclick="addSticky('affect','blue')">+ Add</button>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">👥</div><div class="ws-section-title"><h3>2 — Who does it affect?</h3><p>Members, volunteers, staff, carers, the wider community?</p><div class="ws-prompt">"Who feels this problem most? Who notices it?"</div></div></div>
+      <div class="ws-sticky-grid" id="stickies-affect"><div class="ws-sticky blue">All 200 Soulmates</div><div class="ws-sticky blue">Volunteers — fewer events they can help with</div><div class="ws-sticky blue">Members who rely on transport to events</div><div class="ws-sticky blue">Members with sensory or access needs</div></div>
+      <div class="ws-add-row"><input class="ws-input" id="in-affect" placeholder="Who else does this affect?"/><button class="ws-post-btn" onclick="addSticky('affect','blue')">+ Add</button></div>
     </div>
-
-    <!-- Section 3: Why does it matter -->
-    <div class="ws-section" id="ws-matter">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">💚</div>
-        <div class="ws-section-title">
-          <h3>3 — Why does it matter?</h3>
-          <p>What happens if we don't change things?</p>
-          <div class="ws-prompt">"What do we lose if this stays the same?"</div>
-        </div>
-      </div>
-      <div class="ws-sticky-grid" id="stickies-matter">
-        <div class="ws-sticky green">Members lose regular social connection</div>
-        <div class="ws-sticky green">Volunteers burn out without support</div>
-        <div class="ws-sticky green">Some members can't attend at all</div>
-        <div class="ws-sticky green">Community feel weakens over time</div>
-        <div class="ws-sticky green">Freshers' Week and outreach opportunities missed</div>
-      </div>
-      <div class="ws-add-row">
-        <input class="ws-input" id="in-matter" placeholder="What else could happen if nothing changes?" />
-        <button class="ws-post-btn" onclick="addSticky('matter','green')">+ Add</button>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">💚</div><div class="ws-section-title"><h3>3 — Why does it matter?</h3><p>What happens if we don't change things?</p><div class="ws-prompt">"What do we lose if this stays the same?"</div></div></div>
+      <div class="ws-sticky-grid" id="stickies-matter"><div class="ws-sticky green">Members lose regular social connection</div><div class="ws-sticky green">Volunteers burn out without support</div><div class="ws-sticky green">Some members can't attend at all</div><div class="ws-sticky green">Community feel weakens over time</div><div class="ws-sticky green">Freshers' Week and outreach opportunities missed</div></div>
+      <div class="ws-add-row"><input class="ws-input" id="in-matter" placeholder="What else could happen if nothing changes?"/><button class="ws-post-btn" onclick="addSticky('matter','green')">+ Add</button></div>
     </div>
-
-    <!-- Section 4: What can't we change -->
-    <div class="ws-section" id="ws-constraints">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">🔒</div>
-        <div class="ws-section-title">
-          <h3>4 — What can't we change? (constraints)</h3>
-          <p>Things we have to work with — budget, capacity, accessibility requirements</p>
-          <div class="ws-prompt">"These are our limits. What must we work within?"</div>
-        </div>
-      </div>
-      <div class="ws-sticky-grid" id="stickies-constraints">
-        <div class="ws-sticky pink">Limited budget</div>
-        <div class="ws-sticky pink">Staff capacity</div>
-        <div class="ws-sticky pink">Step-free access required</div>
-        <div class="ws-sticky pink">Ciara needs a work phone first</div>
-      </div>
-      <div class="ws-add-row">
-        <input class="ws-input" id="in-constraints" placeholder="What else can't we change?" />
-        <button class="ws-post-btn" onclick="addSticky('constraints','pink')">+ Add</button>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">🔒</div><div class="ws-section-title"><h3>4 — What can't we change? (constraints)</h3><p>Things we have to work with — budget, capacity, accessibility requirements</p><div class="ws-prompt">"These are our limits. What must we work within?"</div></div></div>
+      <div class="ws-sticky-grid" id="stickies-constraints"><div class="ws-sticky pink">Limited budget</div><div class="ws-sticky pink">Staff capacity</div><div class="ws-sticky pink">Step-free access required</div><div class="ws-sticky pink">Ciara needs a work phone first</div></div>
+      <div class="ws-add-row"><input class="ws-input" id="in-constraints" placeholder="What else can't we change?"/><button class="ws-post-btn" onclick="addSticky('constraints','pink')">+ Add</button></div>
     </div>
-
-    <!-- Section 5: Brainstorm ideas -->
-    <div class="ws-section" id="ws-ideas">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">💡</div>
-        <div class="ws-section-title">
-          <h3>5 — Brainstorm ideas</h3>
-          <p>All ideas welcome here — no filtering, no judging. Anything goes.</p>
-          <div class="ws-prompt">"What could we try? Even wild ideas can spark better ones."</div>
-        </div>
-      </div>
-      <div class="ws-sticky-grid" id="stickies-ideas">
-        <div class="ws-sticky purple">Freshers week stall — more students</div>
-        <div class="ws-sticky purple">Volunteer-specific meetups</div>
-        <div class="ws-sticky purple">More volunteer transport support</div>
-        <div class="ws-sticky purple">Share neurodivergence info library</div>
-        <div class="ws-sticky purple">Charity pitch for market</div>
-        <div class="ws-sticky purple">Golden Hind as new regular venue</div>
-        <div class="ws-sticky purple">Crystal Maze / Museum day trips</div>
-        <div class="ws-sticky purple">Online monthly social Zoom</div>
-      </div>
-      <div class="ws-add-row">
-        <input class="ws-input" id="in-ideas" placeholder="Add your idea — anything at all!" />
-        <button class="ws-post-btn" onclick="addSticky('ideas','purple')">+ Add</button>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">💡</div><div class="ws-section-title"><h3>5 — Brainstorm ideas</h3><p>All ideas welcome here — no filtering, no judging. Anything goes.</p><div class="ws-prompt">"What could we try? Even wild ideas can spark better ones."</div></div></div>
+      <div class="ws-sticky-grid" id="stickies-ideas"><div class="ws-sticky purple">Freshers week stall — more students</div><div class="ws-sticky purple">Volunteer-specific meetups</div><div class="ws-sticky purple">More volunteer transport support</div><div class="ws-sticky purple">Share neurodivergence info library</div><div class="ws-sticky purple">Charity pitch for market</div><div class="ws-sticky purple">Golden Hind as new regular venue</div><div class="ws-sticky purple">Crystal Maze / Museum day trips</div><div class="ws-sticky purple">Online monthly social Zoom</div></div>
+      <div class="ws-add-row"><input class="ws-input" id="in-ideas" placeholder="Add your idea — anything at all!"/><button class="ws-post-btn" onclick="addSticky('ideas','purple')">+ Add</button></div>
     </div>
-
-    <!-- Section 6: Action steps -->
-    <div class="ws-section" id="ws-actions">
-      <div class="ws-section-header">
-        <div class="ws-section-icon">✅</div>
-        <div class="ws-section-title">
-          <h3>6 — Action steps</h3>
-          <p>What are we going to do, who owns it, and when?</p>
-          <div class="ws-prompt">"Pick the most important next steps and give them a home."</div>
-        </div>
-      </div>
+    <div class="ws-section">
+      <div class="ws-section-header"><div class="ws-section-icon">✅</div><div class="ws-section-title"><h3>6 — Action steps</h3><p>What are we going to do, who owns it, and when?</p><div class="ws-prompt">"Pick the most important next steps and give them a home."</div></div></div>
       <div class="action-table-wrap">
-        <table class="action-table" id="action-table">
-          <thead>
-            <tr>
-              <th>Action</th>
-              <th>Owner</th>
-              <th>Priority</th>
-            </tr>
-          </thead>
-          <tbody id="action-tbody">
-            <tr><td>Confirm zoo trip bus driver</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
-            <tr><td>Assess Golden Hind as new regular venue</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
-            <tr><td>Get Ciara a work phone (under £100)</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
-            <tr><td>Set up volunteer WhatsApp group</td><td>Safe</td><td><span class="status-badge status-soon">Soon</span></td></tr>
-            <tr><td>Organise volunteer-only Zoom</td><td>Safe</td><td><span class="status-badge status-soon">Soon</span></td></tr>
-            <tr><td>Andy to formally put name forward as volunteer</td><td>Andy</td><td><span class="status-badge status-soon">Soon</span></td></tr>
-            <tr><td>Freshers' Week stall (Anglia Ruskin / Cambridge)</td><td>Safe + Ciara</td><td><span class="status-badge status-later">Later</span></td></tr>
-            <tr><td>Radio interview via Natasha's contact</td><td>Safe + Natasha</td><td><span class="status-badge status-later">Later</span></td></tr>
-          </tbody>
-        </table>
+        <table class="action-table"><thead><tr><th>Action</th><th>Owner</th><th>Priority</th></tr></thead>
+        <tbody id="action-tbody">
+          <tr><td>Confirm zoo trip bus driver</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
+          <tr><td>Assess Golden Hind as new regular venue</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
+          <tr><td>Get Ciara a work phone (under £100)</td><td>Safe</td><td><span class="status-badge status-urgent">Urgent</span></td></tr>
+          <tr><td>Set up volunteer WhatsApp group</td><td>Safe</td><td><span class="status-badge status-soon">Soon</span></td></tr>
+          <tr><td>Organise volunteer-only Zoom</td><td>Safe</td><td><span class="status-badge status-soon">Soon</span></td></tr>
+          <tr><td>Andy to formally put name forward as volunteer</td><td>Andy</td><td><span class="status-badge status-soon">Soon</span></td></tr>
+          <tr><td>Freshers' Week stall (Anglia Ruskin / Cambridge)</td><td>Safe + Ciara</td><td><span class="status-badge status-later">Later</span></td></tr>
+          <tr><td>Radio interview via Natasha's contact</td><td>Safe + Natasha</td><td><span class="status-badge status-later">Later</span></td></tr>
+        </tbody></table>
         <div class="add-action-row">
-          <input class="action-input" id="action-text" placeholder="New action…" />
-          <input class="action-input sm" id="action-owner" placeholder="Owner" />
+          <input class="action-input" id="action-text" placeholder="New action…"/>
+          <input class="action-input sm" id="action-owner" placeholder="Owner"/>
           <select class="action-input sm" id="action-priority">
-            <option value="urgent">🔴 Urgent</option>
-            <option value="soon">🟡 Soon</option>
-            <option value="later">🔵 Later</option>
-            <option value="done">🟢 Done</option>
+            <option value="urgent">🔴 Urgent</option><option value="soon">🟡 Soon</option>
+            <option value="later">🔵 Later</option><option value="done">🟢 Done</option>
           </select>
           <button class="action-add-btn" onclick="addAction()">+ Add</button>
         </div>
       </div>
     </div>
-
-  </div><!-- /workshop-wrap -->
-</div><!-- /panel-workshop -->
-
-<footer>Safe Soulmates Community Collaboration Board · May 2026 · safesoulmates.org</footer>
+  </div>
+</div>
+<footer>Safe Soulmates Community Collaboration Board · 2026 · safesoulmates.org</footer>
 <div class="toast" id="toast">💛 Added!</div>
-
 <script>
-/* ---- TAB SWITCHING ---- */
-function switchTab(tab) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
-  document.getElementById('panel-' + tab).classList.add('active');
+const SHEET_URL='https://script.google.com/macros/s/AKfycbzI2_8DaWeuIj8hvDHRrZbIWXV-G1-FE1dNGX2l-p1LAgZpjX4PE1AuOLk3alrYtO7Y/exec';
+
+function switchTab(tab){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>{b.classList.remove('active');b.setAttribute('aria-selected','false');});
+  document.getElementById('panel-'+tab).classList.add('active');
   event.currentTarget.classList.add('active');
   event.currentTarget.setAttribute('aria-selected','true');
 }
 
-/* ---- IDEAS BOARD ---- */
-const COLUMNS = [
-  { emoji:"⭐", title:"Events we loved", desc:"What has worked well for you?", placeholder:"e.g. The beach trip — loved having time outdoors together",
-    examples:[{text:"The Comic-Con trip was amazing! So much to see and everyone was so friendly.",author:"Soulmate"},{text:"Film Club — Bill always picks great films and it feels relaxed.",author:"Soulmate"},{text:"I loved the Fort Park trip. Being outside with the group felt really calming. 🌿",author:"Soulmate"}] },
-  { emoji:"💡", title:"New event ideas", desc:"Anything you'd love us to try", placeholder:"e.g. A board game café afternoon — relaxed, no pressure to talk loads",
-    examples:[{text:"Museum visits — free entry, calm spaces, lots to look at without needing to chat loads.",author:"Soulmate"},{text:"Crystal Maze live experience in London! Could be an overnight trip? 🎉",author:"Shawnee"},{text:"Quiet café meetups — smaller group, calmer vibe, easier to have real conversations.",author:"Soulmate"}] },
-  { emoji:"🌿", title:"Reasonable Adjustments", desc:"What adjustments help you take part fully?", placeholder:"e.g. Having a quiet room nearby if I need a sensory break",
-    examples:[{text:"Knowing in advance what the venue looks like — even a photo helps me prepare. 📸",author:"Soulmate"},{text:"Quiet spaces or sensory breaks at every event please! Really important for me.",author:"Demie"},{text:"Step-free access — not always available and it really limits where I can go.",author:"Soulmate"}] },
-  { emoji:"📍", title:"Venue ideas", desc:"Suggestions for regular meeting spots", placeholder:"e.g. The Golden Hind pub — good space, accessible",
-    examples:[{text:"Golden Hind — Andy recommends it as a replacement for Milton Arms. Accessible layout.",author:"Andy"},{text:"Free museums around Cambridge — warm, accessible, no cost, never feel rushed.",author:"Soulmate"},{text:"Somewhere with parking and a bus route — transport is the biggest barrier for some of us.",author:"Soulmate"}] },
-  { emoji:"🤝", title:"Getting involved", desc:"Volunteering or helping out", placeholder:"e.g. I'd love to help with transport or be a buddy at events",
-    examples:[{text:"Happy to help with website or IT stuff if that's useful — I enjoy that kind of thing.",author:"Bill"},{text:"I could come to a volunteer Zoom to introduce myself and find out what's needed. 😊",author:"Andy"},{text:"Would love a buddy role — supporting someone at events so they feel less on their own.",author:"Soulmate"}] },
-  { emoji:"💬", title:"Anything else", desc:"Anything at all — open space", placeholder:"Anything on your mind — no topic too small 💛",
-    examples:[{text:"Really appreciate that this form exists. It's easier than speaking up in a meeting. Thank you. 💛",author:"Soulmate"},{text:"Could we have more online socials for people who can't travel? Even a monthly Zoom catch-up.",author:"Soulmate"},{text:"The organisation feels really warm and welcoming. Just wanted to say that. 🌻",author:"Soulmate"}] }
+const COLUMNS=[
+  {emoji:"⭐",title:"Events we loved",desc:"What has worked well for you?",placeholder:"e.g. The beach trip — loved having time outdoors together",examples:[{text:"The Comic-Con trip was amazing! So much to see and everyone was so friendly.",author:"Soulmate"},{text:"Film Club — Bill always picks great films and it feels relaxed.",author:"Soulmate"},{text:"I loved the Fort Park trip. Being outside with the group felt really calming. 🌿",author:"Soulmate"}]},
+  {emoji:"💡",title:"New event ideas",desc:"Anything you'd love us to try",placeholder:"e.g. A board game café afternoon — relaxed, no pressure to talk loads",examples:[{text:"Museum visits — free entry, calm spaces, lots to look at without needing to chat loads.",author:"Soulmate"},{text:"Crystal Maze live experience in London! Could be an overnight trip? 🎉",author:"Shawnee"},{text:"Quiet café meetups — smaller group, calmer vibe, easier to have real conversations.",author:"Soulmate"}]},
+  {emoji:"🌿",title:"Reasonable Adjustments",desc:"What adjustments help you take part fully?",placeholder:"e.g. Having a quiet room nearby if I need a sensory break",examples:[{text:"Knowing in advance what the venue looks like — even a photo helps me prepare. 📸",author:"Soulmate"},{text:"Quiet spaces or sensory breaks at every event please! Really important for me.",author:"Demie"},{text:"Step-free access — not always available and it really limits where I can go.",author:"Soulmate"}]},
+  {emoji:"📍",title:"Venue ideas",desc:"Suggestions for regular meeting spots",placeholder:"e.g. The Golden Hind pub — good space, accessible",examples:[{text:"Golden Hind — Andy recommends it as a replacement for Milton Arms. Accessible layout.",author:"Andy"},{text:"Free museums around Cambridge — warm, accessible, no cost, never feel rushed.",author:"Soulmate"},{text:"Somewhere with parking and a bus route — transport is the biggest barrier for some of us.",author:"Soulmate"}]},
+  {emoji:"🤝",title:"Getting involved",desc:"Volunteering or helping out",placeholder:"e.g. I'd love to help with transport or be a buddy at events",examples:[{text:"Happy to help with website or IT stuff if that's useful — I enjoy that kind of thing.",author:"Bill"},{text:"I could come to a volunteer Zoom to introduce myself and find out what's needed. 😊",author:"Andy"},{text:"Would love a buddy role — supporting someone at events so they feel less on their own.",author:"Soulmate"}]},
+  {emoji:"💬",title:"Anything else",desc:"Anything at all — open space",placeholder:"Anything on your mind — no topic too small 💛",examples:[{text:"Really appreciate that this form exists. It's easier than speaking up in a meeting. Thank you. 💛",author:"Soulmate"},{text:"Could we have more online socials for people who can't travel? Even a monthly Zoom catch-up.",author:"Soulmate"},{text:"The organisation feels really warm and welcoming. Just wanted to say that. 🌻",author:"Soulmate"}]}
 ];
 
-const state = COLUMNS.map(() => []);
+const state=COLUMNS.map(()=>[]);
+function formatTime(d){return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});}
 
-function formatTime(d){ return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}); }
-
-function makeCard(text, author, isExample){
-  const card = document.createElement('div');
-  card.className = 'card' + (isExample ? ' example' : '');
-  const au = document.createElement('div'); au.className='card-author'; au.textContent = author || 'Anonymous'; card.appendChild(au);
-  const tx = document.createElement('div'); tx.className='card-text'; tx.textContent = text; card.appendChild(tx);
-  const ft = document.createElement('div'); ft.className='card-footer';
-  if(isExample){ const tag=document.createElement('span'); tag.className='example-tag'; tag.textContent='Example'; ft.appendChild(tag); }
-  else { const t=document.createElement('div'); t.className='card-time'; t.textContent=formatTime(new Date()); ft.appendChild(t); }
-  const lb=document.createElement('button'); lb.className='like-btn'; lb.innerHTML='👍 <span>0</span>';
-  let lk=0; lb.onclick=()=>{ lk++; lb.querySelector('span').textContent=lk; lb.classList.add('liked'); }; ft.appendChild(lb);
-  card.appendChild(ft); return card;
-}
-
-/* ---- GOOGLE SHEETS CONFIG ---- */
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzI2_8DaWeuIj8hvDHRrZbIWXV-G1-FE1dNGX2l-p1LAgZpjX4PE1AuOLk3alrYtO7Y/exec';
-
-function saveToSheet(panel, column, author, text){
-  fetch(SHEET_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ panel, column, author, text })
-  }).catch(()=>{}); // silent fail — post still appears locally
+function saveToSheet(panel,column,author,text){
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({panel,column,author,text})}).catch(()=>{});
 }
 
 async function loadFromSheet(){
-  try {
-    const res = await fetch(SHEET_URL + '?t=' + Date.now());
-    const rows = await res.json();
-    // Load ideas board posts
-    rows.forEach(row => {
-      if(row.panel === 'ideas'){
-        const colIdx = COLUMNS.findIndex(c => c.title === row.column);
-        if(colIdx >= 0 && row.text){
-          state[colIdx].push({text: row.text, author: row.author});
-          const cardsEl = document.getElementById('cards-'+colIdx);
-          if(cardsEl) {
-            cardsEl.appendChild(makeCard(row.text, row.author, false, row.timestamp));
-            document.getElementById('count-'+colIdx).textContent = COLUMNS[colIdx].examples.length + state[colIdx].length;
-          }
+  try{
+    const res=await fetch(SHEET_URL+'?t='+Date.now());
+    const rows=await res.json();
+    rows.forEach(row=>{
+      if(row.panel==='ideas'){
+        const colIdx=COLUMNS.findIndex(c=>c.title===row.column);
+        if(colIdx>=0&&row.text){
+          state[colIdx].push({text:row.text,author:row.author});
+          const cardsEl=document.getElementById('cards-'+colIdx);
+          if(cardsEl){cardsEl.appendChild(makeCard(row.text,row.author,false,row.timestamp));document.getElementById('count-'+colIdx).textContent=COLUMNS[colIdx].examples.length+state[colIdx].length;}
         }
       }
-      if(row.panel === 'workshop' && row.text){
-        const colourMap = {problem:'yellow',affect:'blue',matter:'green',constraints:'pink',ideas:'purple'};
-        const colour = colourMap[row.column];
-        if(colour){
-          const grid = document.getElementById('stickies-'+row.column);
-          if(grid){ const s=document.createElement('div'); s.className='ws-sticky '+colour; s.textContent=row.text; grid.appendChild(s); }
-        }
-        if(row.column === 'action'){
-          const parts = row.text.split('||');
-          const text = parts[0]||'', owner = parts[1]||'—', priority = parts[2]||'later';
+      if(row.panel==='workshop'&&row.text){
+        const colourMap={problem:'yellow',affect:'blue',matter:'green',constraints:'pink',ideas:'purple'};
+        const colour=colourMap[row.column];
+        if(colour){const grid=document.getElementById('stickies-'+row.column);if(grid){const s=document.createElement('div');s.className='ws-sticky '+colour;s.textContent=row.text;grid.appendChild(s);}}
+        if(row.column==='action'){
+          const parts=row.text.split('||');const text=parts[0]||'',owner=parts[1]||'—',priority=parts[2]||'later';
           const statusMap={urgent:'status-urgent',soon:'status-soon',later:'status-later',done:'status-done'};
           const labelMap={urgent:'Urgent',soon:'Soon',later:'Later',done:'Done'};
           const tbody=document.getElementById('action-tbody');
-          if(tbody){ const tr=document.createElement('tr'); tr.innerHTML=`<td>${text}</td><td>${owner}</td><td><span class="status-badge ${statusMap[priority]}">${labelMap[priority]}</span></td>`; tbody.appendChild(tr); }
+          if(tbody){const tr=document.createElement('tr');tr.innerHTML=`<td>${text}</td><td>${owner}</td><td><span class="status-badge ${statusMap[priority]}">${labelMap[priority]}</span></td>`;tbody.appendChild(tr);}
         }
       }
     });
-  } catch(e){ /* offline or first load — no problem */ }
+  }catch(e){}
 }
 
-/* ---- IDEAS BOARD ---- */
+function makeCard(text,author,isExample,timestamp){
+  const card=document.createElement('div');card.className='card'+(isExample?' example':'');
+  const au=document.createElement('div');au.className='card-author';au.textContent=author||'Anonymous';card.appendChild(au);
+  const tx=document.createElement('div');tx.className='card-text';tx.textContent=text;card.appendChild(tx);
+  const ft=document.createElement('div');ft.className='card-footer';
+  if(isExample){const tag=document.createElement('span');tag.className='example-tag';tag.textContent='Example';ft.appendChild(tag);}
+  else{const t=document.createElement('div');t.className='card-time';t.textContent=timestamp?new Date(timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):formatTime(new Date());ft.appendChild(t);}
+  const lb=document.createElement('button');lb.className='like-btn';lb.innerHTML='👍 <span>0</span>';
+  let lk=0;lb.onclick=()=>{lk++;lb.querySelector('span').textContent=lk;lb.classList.add('liked');};ft.appendChild(lb);
+  card.appendChild(ft);return card;
+}
+
 function addNote(i){
-  const ta=document.getElementById('ta-'+i), ni=document.getElementById('name-'+i), ac=document.getElementById('anon-'+i);
-  const text=ta.value.trim(); if(!text){ ta.style.borderColor='#BC4367'; setTimeout(()=>ta.style.borderColor='',1200); ta.focus(); return; }
+  const ta=document.getElementById('ta-'+i),ni=document.getElementById('name-'+i),ac=document.getElementById('anon-'+i);
+  const text=ta.value.trim();if(!text){ta.style.borderColor='#BC4367';setTimeout(()=>ta.style.borderColor='',1200);ta.focus();return;}
   const author=ac.checked?'Anonymous':(ni.value.trim()||'Anonymous');
   state[i].push({text,author});
   document.getElementById('cards-'+i).appendChild(makeCard(text,author,false));
   document.getElementById('count-'+i).textContent=COLUMNS[i].examples.length+state[i].length;
-  saveToSheet('ideas', COLUMNS[i].title, author, text);
-  ta.value=''; if(!ac.checked) ni.value='';
+  saveToSheet('ideas',COLUMNS[i].title,author,text);
+  ta.value='';if(!ac.checked)ni.value='';
   document.getElementById('cards-'+i).lastElementChild.scrollIntoView({behavior:'smooth',block:'nearest'});
   showToast('💛 Your note has been saved!');
 }
 
 function renderBoard(){
-  const board=document.getElementById('board'); board.innerHTML='';
+  const board=document.getElementById('board');board.innerHTML='';
   COLUMNS.forEach((col,i)=>{
-    const column=document.createElement('div'); column.className='column'; column.dataset.col=i;
+    const column=document.createElement('div');column.className='column';column.dataset.col=i;
     column.innerHTML=`<div class="col-header"><div class="col-emoji">${col.emoji}</div><div class="col-info"><h3>${col.title}</h3><p>${col.desc}</p></div><div class="col-count" id="count-${i}">${col.examples.length}</div></div>`;
-    const cards=document.createElement('div'); cards.className='cards'; cards.id='cards-'+i;
+    const cards=document.createElement('div');cards.className='cards';cards.id='cards-'+i;
     col.examples.forEach(ex=>cards.appendChild(makeCard(ex.text,ex.author,true)));
     column.appendChild(cards);
-    const aa=document.createElement('div'); aa.className='add-area';
+    const aa=document.createElement('div');aa.className='add-area';
     aa.innerHTML=`<textarea id="ta-${i}" placeholder="${col.placeholder}" aria-label="Add your idea to ${col.title}"></textarea><div class="add-row"><input type="text" class="name-input" id="name-${i}" placeholder="Your name (optional)"><label class="anon-label"><input type="checkbox" id="anon-${i}" onchange="document.getElementById('name-${i}').disabled=this.checked;document.getElementById('name-${i}').style.opacity=this.checked?'0.4':'1'"> Anon</label><button class="add-btn" onclick="addNote(${i})">+ Add</button></div>`;
-    column.appendChild(aa);
-    board.appendChild(column);
-    document.getElementById('ta-'+i).addEventListener('keydown',e=>{ if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)) addNote(i); });
+    column.appendChild(aa);board.appendChild(column);
+    document.getElementById('ta-'+i).addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))addNote(i);});
   });
 }
 
-/* ---- WORKSHOP ---- */
-function addSticky(section, colour){
+function addSticky(section,colour){
   const input=document.getElementById('in-'+section);
-  const text=input.value.trim(); if(!text){ input.style.borderColor='#BC4367'; setTimeout(()=>input.style.borderColor='',1200); input.focus(); return; }
+  const text=input.value.trim();if(!text){input.style.borderColor='#BC4367';setTimeout(()=>input.style.borderColor='',1200);input.focus();return;}
   const grid=document.getElementById('stickies-'+section);
-  const s=document.createElement('div'); s.className='ws-sticky '+colour; s.textContent=text; grid.appendChild(s);
-  saveToSheet('workshop', section, 'Soulmate', text);
-  input.value=''; s.scrollIntoView({behavior:'smooth',block:'nearest'});
+  const s=document.createElement('div');s.className='ws-sticky '+colour;s.textContent=text;grid.appendChild(s);
+  saveToSheet('workshop',section,'Soulmate',text);
+  input.value='';s.scrollIntoView({behavior:'smooth',block:'nearest'});
   showToast('💛 Sticky saved!');
 }
 
@@ -758,37 +363,20 @@ function addAction(){
   const text=document.getElementById('action-text').value.trim();
   const owner=document.getElementById('action-owner').value.trim()||'—';
   const priority=document.getElementById('action-priority').value;
-  if(!text){ document.getElementById('action-text').style.borderColor='#BC4367'; setTimeout(()=>document.getElementById('action-text').style.borderColor='',1200); document.getElementById('action-text').focus(); return; }
+  if(!text){document.getElementById('action-text').style.borderColor='#BC4367';setTimeout(()=>document.getElementById('action-text').style.borderColor='',1200);document.getElementById('action-text').focus();return;}
   const statusMap={urgent:'status-urgent',soon:'status-soon',later:'status-later',done:'status-done'};
   const labelMap={urgent:'Urgent',soon:'Soon',later:'Later',done:'Done'};
   const tbody=document.getElementById('action-tbody');
   const tr=document.createElement('tr');
   tr.innerHTML=`<td>${text}</td><td>${owner}</td><td><span class="status-badge ${statusMap[priority]}">${labelMap[priority]}</span></td>`;
   tbody.appendChild(tr);
-  saveToSheet('workshop', 'action', owner, text+'||'+owner+'||'+priority);
-  document.getElementById('action-text').value=''; document.getElementById('action-owner').value='';
+  saveToSheet('workshop','action',owner,text+'||'+owner+'||'+priority);
+  document.getElementById('action-text').value='';document.getElementById('action-owner').value='';
   tr.scrollIntoView({behavior:'smooth',block:'nearest'});
   showToast('✅ Action saved!');
 }
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent = msg || '💛 Saved!';
-  t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2500);
-}
-
-function makeCard(text, author, isExample, timestamp){
-  const card = document.createElement('div');
-  card.className = 'card' + (isExample ? ' example' : '');
-  const au = document.createElement('div'); au.className='card-author'; au.textContent = author || 'Anonymous'; card.appendChild(au);
-  const tx = document.createElement('div'); tx.className='card-text'; tx.textContent = text; card.appendChild(tx);
-  const ft = document.createElement('div'); ft.className='card-footer';
-  if(isExample){ const tag=document.createElement('span'); tag.className='example-tag'; tag.textContent='Example'; ft.appendChild(tag); }
-  else { const t=document.createElement('div'); t.className='card-time'; t.textContent = timestamp ? new Date(timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : formatTime(new Date()); ft.appendChild(t); }
-  const lb=document.createElement('button'); lb.className='like-btn'; lb.innerHTML='👍 <span>0</span>';
-  let lk=0; lb.onclick=()=>{ lk++; lb.querySelector('span').textContent=lk; lb.classList.add('liked'); }; ft.appendChild(lb);
-  card.appendChild(ft); return card;
-}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg||'💛 Saved!';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 
 renderBoard();
 loadFromSheet();
