@@ -338,7 +338,8 @@ function renderBoard(){
   const board=document.getElementById('board');board.innerHTML='';
   COLUMNS.forEach((col,i)=>{
     const column=document.createElement('div');column.className='column';column.dataset.col=i;
-    column.innerHTML=`<div class="col-header"><div class="col-emoji">${col.emoji}</div><div class="col-info"><h3>${col.title}</h3><p>${col.desc}</p></div><div class="col-count" id="count-${i}">${col.examples.length}</div></div>`;
+    const colColours=['#b5a000','#5a8a52','#5D79B0','#8863A8','#BC4367','#444444'];
+    column.innerHTML=`<div class="col-header" style="background:${colColours[i]};padding:18px 18px 16px"><div class="col-emoji" style="font-size:1.7rem">${col.emoji}</div><div class="col-info"><h3 style="color:white;font-size:1.05rem;font-weight:800">${col.title}</h3><p style="color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:600;margin-top:2px">${col.desc}</p></div><div class="col-count" style="margin-left:auto;background:rgba(255,255,255,0.25);color:white;font-size:0.72rem;font-weight:800;padding:3px 9px;border-radius:12px" id="count-${i}">${col.examples.length}</div></div>`;
     const cards=document.createElement('div');cards.className='cards';cards.id='cards-'+i;
     col.examples.forEach(ex=>cards.appendChild(makeCard(ex.text,ex.author,true)));
     column.appendChild(cards);
