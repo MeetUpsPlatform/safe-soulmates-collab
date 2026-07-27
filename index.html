@@ -319,6 +319,21 @@ function makeCard(text,author,isExample,timestamp){
   else{const t=document.createElement('div');t.className='card-time';t.textContent=timestamp?new Date(timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):formatTime(new Date());ft.appendChild(t);}
   const lb=document.createElement('button');lb.className='like-btn';lb.innerHTML='👍 <span>0</span>';
   let lk=0;lb.onclick=()=>{lk++;lb.querySelector('span').textContent=lk;lb.classList.add('liked');};ft.appendChild(lb);
+  if(!isExample){
+    const delBtn=document.createElement('button');
+    delBtn.style.cssText='background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0.35;padding:2px 4px;transition:opacity 0.15s';
+    delBtn.textContent='🗑️';
+    delBtn.title='Remove this post';
+    delBtn.onmouseenter=()=>delBtn.style.opacity='0.8';
+    delBtn.onmouseleave=()=>delBtn.style.opacity='0.35';
+    delBtn.onclick=()=>{
+      const pin=prompt('Enter staff PIN to remove this post:');
+      if(pin===null)return;
+      if(pin==='1980'){card.remove();}
+      else{alert('Incorrect PIN — post not removed.');}
+    };
+    ft.appendChild(delBtn);
+  }
   card.appendChild(ft);return card;
 }
 
