@@ -78,7 +78,7 @@
   .card-time { font-size: 0.65rem; opacity: 0.4; font-weight: 700; }
   .like-btn { background: none; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 20px; padding: 3px 9px; font-size: 0.72rem; cursor: pointer; display: flex; align-items: center; gap: 4px; font-family: 'Nunito', sans-serif; font-weight: 700; color: var(--charcoal); transition: all 0.15s ease; }
   .like-btn:hover, .like-btn.liked { background: var(--lime); border-color: var(--lime); transform: scale(1.05); }
-  .card.example { background: #fafafa; border: 1.5px dashed rgba(0,0,0,0.12); }
+  .card.example { background: white; }
   .example-tag { font-size: 0.62rem; background: var(--soft-bg); border: 1px solid rgba(0,0,0,0.1); color: var(--charcoal); padding: 2px 7px; border-radius: 8px; font-weight: 700; opacity: 0.7; }
   .add-area { padding: 12px 14px 16px; border-top: 1.5px solid rgba(0,0,0,0.06); background: var(--soft-bg); }
   .add-area textarea { width: 100%; border: 2px solid rgba(0,0,0,0.1); border-radius: 10px; padding: 9px 11px; font-family: 'Nunito', sans-serif; font-size: 0.85rem; resize: none; min-height: 56px; background: white; color: var(--charcoal); transition: border-color 0.2s ease; line-height: 1.5; }
@@ -266,12 +266,12 @@ function switchTab(tab){
 }
 
 const COLUMNS=[
-  {emoji:"⭐",title:"Events we loved",desc:"What has worked well for you?",placeholder:"e.g. The beach trip — loved having time outdoors together"},
-  {emoji:"💡",title:"New event ideas",desc:"Anything you'd love us to try",placeholder:"e.g. A board game café afternoon — relaxed, no pressure to talk loads"},
-  {emoji:"🌿",title:"Reasonable Adjustments",desc:"What adjustments help you take part fully?",placeholder:"e.g. Having a quiet room nearby if I need a sensory break"},
-  {emoji:"📍",title:"Venue ideas",desc:"Suggestions for regular meeting spots",placeholder:"e.g. The Golden Hind pub — good space, accessible"},
-  {emoji:"🤝",title:"Getting involved",desc:"Volunteering or helping out",placeholder:"e.g. I'd love to help with transport or be a buddy at events"},
-  {emoji:"💬",title:"Anything else",desc:"Anything at all — open space",placeholder:"Anything on your mind — no topic too small 💛"}
+  {emoji:"⭐",title:"Events we loved",desc:"What has worked well for you?",placeholder:"e.g. The beach trip — loved having time outdoors together",examples:[{text:"The Comic-Con trip was amazing! So much to see and everyone was so friendly.",author:"Soulmate"},{text:"Film Club — Bill always picks great films and it feels relaxed.",author:"Soulmate"},{text:"I loved the Fort Park trip. Being outside with the group felt really calming. 🌿",author:"Soulmate"}]},
+  {emoji:"💡",title:"New event ideas",desc:"Anything you'd love us to try",placeholder:"e.g. A board game café afternoon — relaxed, no pressure to talk loads",examples:[{text:"Museum visits — free entry, calm spaces, lots to look at without needing to chat loads.",author:"Soulmate"},{text:"Crystal Maze live experience in London! Could be an overnight trip? 🎉",author:"Shawnee"},{text:"Quiet café meetups — smaller group, calmer vibe, easier to have real conversations.",author:"Soulmate"}]},
+  {emoji:"🌿",title:"Reasonable Adjustments",desc:"What adjustments help you take part fully?",placeholder:"e.g. Having a quiet room nearby if I need a sensory break",examples:[{text:"Knowing in advance what the venue looks like — even a photo helps me prepare. 📸",author:"Soulmate"},{text:"Quiet spaces or sensory breaks at every event please! Really important for me.",author:"Demie"},{text:"Step-free access — not always available and it really limits where I can go.",author:"Soulmate"}]},
+  {emoji:"📍",title:"Venue ideas",desc:"Suggestions for regular meeting spots",placeholder:"e.g. The Golden Hind pub — good space, accessible",examples:[{text:"Free museums around Cambridge — warm, accessible, no cost, never feel rushed.",author:"Soulmate"},{text:"Somewhere with parking and a bus route — transport is the biggest barrier for some of us.",author:"Soulmate"},{text:"Kristy suggested finding venues with better food and free parking.",author:"Kristy"}]},
+  {emoji:"🤝",title:"Getting involved",desc:"Volunteering or helping out",placeholder:"e.g. I'd love to help with transport or be a buddy at events",examples:[{text:"Happy to help with website or IT stuff if that's useful — I enjoy that kind of thing.",author:"Bill"},{text:"I could come to a volunteer Zoom to introduce myself and find out what's needed. 😊",author:"Andy"},{text:"Lizzie and Rosie expressed interest in having a volunteer WhatsApp group and separate meetups to co-ordinate activities.",author:"Lizzie and Rosie"}]},
+  {emoji:"💬",title:"Anything else",desc:"Anything at all — open space",placeholder:"Anything on your mind — no topic too small 💛",examples:[{text:"Really appreciate that this form exists. It's easier than speaking up in a meeting. Thank you. 💛",author:"Soulmate"},{text:"Could we have more online socials for people who can't travel? Even a monthly Zoom catch-up.",author:"Soulmate"},{text:"The organisation feels really warm and welcoming. Just wanted to say that. 🌻",author:"Soulmate"}]}
 ];
 
 const state=COLUMNS.map(()=>[]);
@@ -291,7 +291,7 @@ async function loadFromSheet(){
         if(colIdx>=0&&row.text){
           state[colIdx].push({text:row.text,author:row.author});
           const cardsEl=document.getElementById('cards-'+colIdx);
-          if(cardsEl){cardsEl.appendChild(makeCard(row.text,row.author,false,row.timestamp));document.getElementById('count-'+colIdx).textContent=state[colIdx].length;}
+          if(cardsEl){cardsEl.appendChild(makeCard(row.text,row.author,false,row.timestamp));document.getElementById('count-'+colIdx).textContent=COLUMNS[colIdx].examples.length+state[colIdx].length;}
         }
       }
       if(row.panel==='workshop'&&row.text){
@@ -315,7 +315,7 @@ function makeCard(text,author,isExample,timestamp){
   const au=document.createElement('div');au.className='card-author';au.textContent=author||'Anonymous';card.appendChild(au);
   const tx=document.createElement('div');tx.className='card-text';tx.textContent=text;card.appendChild(tx);
   const ft=document.createElement('div');ft.className='card-footer';
-  if(isExample){const tag=document.createElement('span');tag.className='example-tag';tag.textContent='Example';ft.appendChild(tag);}
+  if(isExample){const t=document.createElement('div');t.className='card-time';t.textContent='';ft.appendChild(t);}
   else{const t=document.createElement('div');t.className='card-time';t.textContent=timestamp?new Date(timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):formatTime(new Date());ft.appendChild(t);}
   const lb=document.createElement('button');lb.className='like-btn';lb.innerHTML='👍 <span>0</span>';
   let lk=0;lb.onclick=()=>{lk++;lb.querySelector('span').textContent=lk;lb.classList.add('liked');};ft.appendChild(lb);
@@ -343,7 +343,7 @@ function addNote(i){
   const author=ni.value.trim()||'Anonymous';
   state[i].push({text,author});
   document.getElementById('cards-'+i).appendChild(makeCard(text,author,false));
-  document.getElementById('count-'+i).textContent=state[i].length;
+  document.getElementById('count-'+i).textContent=COLUMNS[i].examples.length+state[i].length;
   saveToSheet('ideas',COLUMNS[i].title,author,text);
   ta.value='';ni.value='';
   document.getElementById('cards-'+i).lastElementChild.scrollIntoView({behavior:'smooth',block:'nearest'});
@@ -355,9 +355,10 @@ function renderBoard(){
   COLUMNS.forEach((col,i)=>{
     const column=document.createElement('div');column.className='column';column.dataset.col=i;
     const colColours=['#b5a000','#5a8a52','#5D79B0','#8863A8','#BC4367','#444444'];
-    column.innerHTML=`<div class="col-header" style="background:${colColours[i]};padding:18px 18px 16px"><div class="col-emoji" style="font-size:1.7rem">${col.emoji}</div><div class="col-info"><h3 style="color:white;font-size:1.05rem;font-weight:800">${col.title}</h3><p style="color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:600;margin-top:2px">${col.desc}</p></div><div class="col-count" style="margin-left:auto;background:rgba(255,255,255,0.25);color:white;font-size:0.72rem;font-weight:800;padding:3px 9px;border-radius:12px" id="count-${i}">0</div></div>`;
+    column.innerHTML=`<div class="col-header" style="background:${colColours[i]};padding:18px 18px 16px"><div class="col-emoji" style="font-size:1.7rem">${col.emoji}</div><div class="col-info"><h3 style="color:white;font-size:1.05rem;font-weight:800">${col.title}</h3><p style="color:rgba(255,255,255,0.85);font-size:0.75rem;font-weight:600;margin-top:2px">${col.desc}</p></div><div class="col-count" style="margin-left:auto;background:rgba(255,255,255,0.25);color:white;font-size:0.72rem;font-weight:800;padding:3px 9px;border-radius:12px" id="count-${i}">${col.examples.length}</div></div>`;
     const cards=document.createElement('div');cards.className='cards';cards.id='cards-'+i;
     
+    col.examples.forEach(ex=>cards.appendChild(makeCard(ex.text,ex.author,true)));
     column.appendChild(cards);
     const aa=document.createElement('div');aa.className='add-area';
     aa.innerHTML=`<textarea id="ta-${i}" placeholder="${col.placeholder}" aria-label="Add your idea to ${col.title}"></textarea><div class="add-row"><input type="text" class="name-input" id="name-${i}" placeholder="Your name (optional)"><button class="add-btn" onclick="addNote(${i})">+ Add</button></div>`;
