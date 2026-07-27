@@ -139,6 +139,18 @@
   .action-add-btn { border: none; border-radius: 8px; padding: 8px 14px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; font-weight: 800; cursor: pointer; color: white; background: var(--sage); flex-shrink: 0; }
   .action-add-btn:hover { filter: brightness(1.1); }
   footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--charcoal); opacity: 0.5; font-weight: 700; border-top: 1px solid rgba(0,0,0,0.06); }
+  .comment-section { margin-top: 10px; border-top: 1.5px solid rgba(0,0,0,0.06); padding-top: 10px; display: none; }
+  .comment-section.open { display: block; }
+  .comment-item { background: var(--soft-bg); border-radius: 8px; padding: 8px 10px; margin-bottom: 6px; font-size: 0.8rem; line-height: 1.45; }
+  .comment-author { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em; opacity: 0.5; margin-bottom: 3px; }
+  .comment-input-row { display: flex; gap: 6px; margin-top: 8px; }
+  .comment-input { flex: 1; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 6px 10px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; background: white; color: var(--charcoal); min-width: 0; }
+  .comment-input:focus { outline: none; border-color: var(--purple); }
+  .comment-name { width: 90px; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 6px 10px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; background: white; color: var(--charcoal); flex-shrink: 0; }
+  .comment-name:focus { outline: none; border-color: var(--purple); }
+  .comment-btn { border: none; border-radius: 8px; padding: 6px 12px; font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 800; cursor: pointer; color: white; background: var(--purple); flex-shrink: 0; }
+  .toggle-comments-btn { background: none; border: 1.5px solid rgba(0,0,0,0.1); border-radius: 20px; padding: 3px 9px; font-size: 0.72rem; cursor: pointer; font-family: 'Nunito', sans-serif; font-weight: 700; color: var(--charcoal); transition: all 0.15s ease; }
+  .toggle-comments-btn:hover { background: var(--soft-bg); }
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--purple); color: white; font-family: 'Nunito', sans-serif; font-size: 0.88rem; font-weight: 700; padding: 12px 22px; border-radius: 30px; z-index: 999; transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1); box-shadow: 0 6px 20px rgba(136,99,168,0.35); pointer-events: none; }
   .toast.show { transform: translateX(-50%) translateY(0); }
   @media (max-width: 600px) {
@@ -335,7 +347,64 @@ function makeCard(text,author,isExample,timestamp){
     };
     ft.appendChild(delBtn);
   }
-  card.appendChild(ft);return card;
+  // Comment toggle button
+  if(!isExample){
+    const commentCount = document.createElement('span');
+    commentCount.className = 'comment-count';
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'toggle-comments-btn';
+    toggleBtn.innerHTML = '💬 <span class="ccount">0</span>';
+    toggleBtn.title = 'View and add comments';
+
+    // Comment section
+    const commentSection = document.createElement('div');
+    commentSection.className = 'comment-section';
+    const commentThread = document.createElement('div');
+    commentThread.className = 'comment-thread';
+    const commentInputRow = document.createElement('div');
+    commentInputRow.className = 'comment-input-row';
+    const nameIn = document.createElement('input');
+    nameIn.className = 'comment-name';
+    nameIn.placeholder = 'Your name';
+    const textIn = document.createElement('input');
+    textIn.className = 'comment-input';
+    textIn.placeholder = 'Add a comment…';
+    const postBtn = document.createElement('button');
+    postBtn.className = 'comment-btn';
+    postBtn.textContent = 'Post';
+    commentInputRow.appendChild(nameIn);
+    commentInputRow.appendChild(textIn);
+    commentInputRow.appendChild(postBtn);
+    commentSection.appendChild(commentThread);
+    commentSection.appendChild(commentInputRow);
+
+    postBtn.onclick = () => {
+      const name = nameIn.value.trim() || 'Soulmate';
+      const txt = textIn.value.trim();
+      if(!txt) return;
+      const item = document.createElement('div');
+      item.className = 'comment-item';
+      item.innerHTML = `<div class="comment-author">${name}</div>${txt}`;
+      commentThread.appendChild(item);
+      nameIn.value = ''; textIn.value = '';
+      const c = commentThread.querySelectorAll('.comment-item').length;
+      toggleBtn.querySelector('.ccount').textContent = c;
+      item.scrollIntoView({behavior:'smooth',block:'nearest'});
+    };
+    textIn.addEventListener('keydown', e => { if(e.key==='Enter') postBtn.click(); });
+
+    toggleBtn.onclick = () => {
+      commentSection.classList.toggle('open');
+      if(commentSection.classList.contains('open')) setTimeout(()=>textIn.focus(),100);
+    };
+
+    ft.appendChild(toggleBtn);
+    card.appendChild(ft);
+    card.appendChild(commentSection);
+  } else {
+    card.appendChild(ft);
+  }
+  return card;
 }
 
 function addNote(i){
