@@ -87,7 +87,7 @@
   .add-row { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
   .name-input { border: 2px solid rgba(0,0,0,0.1); border-radius: 8px; padding: 7px 10px; font-family: 'Nunito', sans-serif; font-size: 0.8rem; flex: 1; background: white; color: var(--charcoal); min-width: 0; }
   .name-input:focus { outline: none; border-color: var(--purple); }
-  .anon-label { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 700; cursor: pointer; color: var(--charcoal); opacity: 0.7; white-space: nowrap; flex-shrink: 0; }
+
   .add-btn { border: none; border-radius: 8px; padding: 8px 14px; font-family: 'Nunito', sans-serif; font-size: 0.82rem; font-weight: 800; cursor: pointer; color: white; transition: all 0.15s ease; flex-shrink: 0; }
   .add-btn:hover { filter: brightness(1.1); transform: translateY(-1px); }
 
@@ -161,7 +161,7 @@
   </div>
   <div class="header-badges">
     <span class="badge">✅ No account needed</span>
-    <span class="badge">🔒 Anonymous posting on</span>
+    
     <span class="badge">📱 Works on any phone</span>
   </div>
 </header>
@@ -177,7 +177,7 @@
     <div class="welcome-rules">
       <span class="rule-pill">✍️ Type or copy-paste</span>
       <span class="rule-pill">😊 Emojis welcome</span>
-      <span class="rule-pill">💛 You can stay anonymous</span>
+      
       <span class="rule-pill">⏱ No rush — stay open for weeks</span>
     </div>
   </div>
@@ -323,14 +323,14 @@ function makeCard(text,author,isExample,timestamp){
 }
 
 function addNote(i){
-  const ta=document.getElementById('ta-'+i),ni=document.getElementById('name-'+i),ac=document.getElementById('anon-'+i);
+  const ta=document.getElementById('ta-'+i),ni=document.getElementById('name-'+i);
   const text=ta.value.trim();if(!text){ta.style.borderColor='#BC4367';setTimeout(()=>ta.style.borderColor='',1200);ta.focus();return;}
-  const author=ac.checked?'Anonymous':(ni.value.trim()||'Anonymous');
+  const author=ni.value.trim()||'Anonymous';
   state[i].push({text,author});
   document.getElementById('cards-'+i).appendChild(makeCard(text,author,false));
   document.getElementById('count-'+i).textContent=COLUMNS[i].examples.length+state[i].length;
   saveToSheet('ideas',COLUMNS[i].title,author,text);
-  ta.value='';if(!ac.checked)ni.value='';
+  ta.value='';ni.value='';
   document.getElementById('cards-'+i).lastElementChild.scrollIntoView({behavior:'smooth',block:'nearest'});
   showToast('💛 Your note has been saved!');
 }
@@ -345,7 +345,7 @@ function renderBoard(){
     col.examples.forEach(ex=>cards.appendChild(makeCard(ex.text,ex.author,true)));
     column.appendChild(cards);
     const aa=document.createElement('div');aa.className='add-area';
-    aa.innerHTML=`<textarea id="ta-${i}" placeholder="${col.placeholder}" aria-label="Add your idea to ${col.title}"></textarea><div class="add-row"><input type="text" class="name-input" id="name-${i}" placeholder="Your name (optional)"><label class="anon-label"><input type="checkbox" id="anon-${i}" onchange="document.getElementById('name-${i}').disabled=this.checked;document.getElementById('name-${i}').style.opacity=this.checked?'0.4':'1'"> Anon</label><button class="add-btn" onclick="addNote(${i})">+ Add</button></div>`;
+    aa.innerHTML=`<textarea id="ta-${i}" placeholder="${col.placeholder}" aria-label="Add your idea to ${col.title}"></textarea><div class="add-row"><input type="text" class="name-input" id="name-${i}" placeholder="Your name (optional)"><button class="add-btn" onclick="addNote(${i})">+ Add</button></div>`;
     column.appendChild(aa);board.appendChild(column);
     document.getElementById('ta-'+i).addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))addNote(i);});
   });
