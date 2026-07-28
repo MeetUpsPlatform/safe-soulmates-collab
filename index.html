@@ -291,7 +291,15 @@ const state=COLUMNS.map(()=>[]);
 function formatTime(d){return d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});}
 
 function saveToSheet(panel,column,author,text){
-  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({panel,column,author,text})}).catch(()=>{});
+  const ts = new Date().toISOString();
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addPost',panel,column,author,text,timestamp:ts})}).catch(()=>{});
+  return ts;
+}
+function saveComment(timestamp,name,text){
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addComment',timestamp,name,text})}).catch(()=>{});
+}
+function saveLike(timestamp){
+  fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'addLike',timestamp})}).catch(()=>{});
 }
 
 async function loadFromSheet(){
@@ -304,7 +312,12 @@ async function loadFromSheet(){
         if(colIdx>=0&&row.text){
           state[colIdx].push({text:row.text,author:row.author});
           const cardsEl=document.getElementById('cards-'+colIdx);
-          if(cardsEl){cardsEl.appendChild(makeCard(row.text,row.author,false,row.timestamp));document.getElementById('count-'+colIdx).textContent=COLUMNS[colIdx].examples.length+state[colIdx].length;}
+          if(cardsEl){
+            const comments = row.comments || [];
+            const likes = row.likes || 0;
+            cardsEl.appendChild(makeCard(row.text,row.author,false,row.timestamp,likes,comments));
+            document.getElementById('count-'+colIdx).textContent=COLUMNS[colIdx].examples.length+state[colIdx].length;
+          }
         }
       }
       if(row.panel==='workshop'&&row.text){
@@ -323,15 +336,17 @@ async function loadFromSheet(){
   }catch(e){}
 }
 
-function makeCard(text,author,isExample,timestamp){
+function makeCard(text,author,isExample,timestamp,likes,comments){
   const card=document.createElement('div');card.className='card'+(isExample?' example':'');
   const au=document.createElement('div');au.className='card-author';au.textContent=author||'Anonymous';card.appendChild(au);
   const tx=document.createElement('div');tx.className='card-text';tx.textContent=text;card.appendChild(tx);
   const ft=document.createElement('div');ft.className='card-footer';
   if(isExample){const t=document.createElement('div');t.className='card-time';t.textContent='';ft.appendChild(t);}
   else{const t=document.createElement('div');t.className='card-time';t.textContent=timestamp?new Date(timestamp).toLocaleDateString('en-GB',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):formatTime(new Date());ft.appendChild(t);}
-  const lb=document.createElement('button');lb.className='like-btn';lb.innerHTML='👍 <span>0</span>';
-  let lk=0;lb.onclick=()=>{lk++;lb.querySelector('span').textContent=lk;lb.classList.add('liked');};ft.appendChild(lb);
+  const lb=document.createElement('button');lb.className='like-btn';
+  let lk=parseInt(likes)||0;
+  lb.innerHTML='👍 <span>'+lk+'</span>';
+  lb.onclick=()=>{lk++;lb.querySelector('span').textContent=lk;lb.classList.add('liked');if(timestamp)saveLike(timestamp);};ft.appendChild(lb);
   if(!isExample){
     const delBtn=document.createElement('button');
     delBtn.style.cssText='background:none;border:none;cursor:pointer;font-size:0.85rem;opacity:0.35;padding:2px 4px;transition:opacity 0.15s';
@@ -390,7 +405,17 @@ function makeCard(text,author,isExample,timestamp){
       const c = commentThread.querySelectorAll('.comment-item').length;
       toggleBtn.querySelector('.ccount').textContent = c;
       item.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(timestamp) saveComment(timestamp, name, txt);
     };
+    // Load existing comments
+    if(comments && comments.length){
+      comments.forEach(c=>{
+        const item=document.createElement('div');item.className='comment-item';
+        item.innerHTML=`<div class="comment-author">${c.name||'Soulmate'}</div>${c.text}`;
+        commentThread.appendChild(item);
+      });
+      toggleBtn.querySelector('.ccount').textContent=comments.length;
+    }
     textIn.addEventListener('keydown', e => { if(e.key==='Enter') postBtn.click(); });
 
     toggleBtn.onclick = () => {
